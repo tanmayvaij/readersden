@@ -1,0 +1,7 @@
+{
+  "name": "ReadAThon",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
