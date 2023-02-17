@@ -12,12 +12,15 @@ import {
     IonToolbar
 } from '@ionic/react'
 import { useState } from 'react'
+import { useHistory } from 'react-router'
 import { GlobalStates } from '../../context'
 import './index.css'
 
 const Signup: React.FC = () => {
 
-    const { apiUrl, user }  = GlobalStates()
+    const history = useHistory()
+
+    const { apiUrl }  = GlobalStates()
 
     const [state, setState] = useState({
         name: "", 
@@ -42,7 +45,32 @@ const Signup: React.FC = () => {
         const data = await res.json()
 
         if (data.success) {
+
             localStorage.setItem("authtoken", data.authtoken)
+            
+            const getUserDetails = async () => {
+
+                const res = await fetch(`${apiUrl}/api/auth/getuser`, {
+                    method: "GET",
+                    headers: {
+                        "Content-type": "application/json",
+                        "authtoken": data.authtoken
+                    }
+                })
+    
+                const user = await res.json()
+
+                console.log(user)
+                
+                localStorage.setItem("user", JSON.stringify(user))
+                
+            }
+
+            getUserDetails()
+
+
+            window.location.href = "/"
+
         }
 
     }

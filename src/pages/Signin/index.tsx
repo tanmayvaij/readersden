@@ -1,13 +1,42 @@
-import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import {
+    IonBackButton,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonPage,
+    IonTitle,
+    IonToolbar
+} from '@ionic/react'
 import { useState } from 'react'
+import { GlobalStates } from '../../context'
 import './index.css'
 
 const Signin: React.FC = () => {
 
-    const [ state, setState ] = useState({ email: "", password: "" })
+    const { apiUrl } = GlobalStates()
 
-    const signIn = () => {
+    const [state, setState] = useState({ email: "", password: "" })
+
+    const signIn = async () => {
+
+        const res = await fetch(`${apiUrl}/api/auth/signin`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(state)
+        })
+
+        const data = await res.json()
+
+        if (data.success) localStorage.setItem("authtoken", data.authtoken)
         
+        window.location.reload()
+
     }
 
     return (

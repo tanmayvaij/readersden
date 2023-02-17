@@ -10,9 +10,27 @@ const Context = ({ children }: any) => {
 
     useEffect(() => {
 
-        
+        const authtoken = localStorage.getItem("authtoken") as string
 
-    }, [user])
+        const getUserDetails = async () => {
+
+            const res = await fetch(`${apiUrl}/api/auth/getuser`, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "authtoken": authtoken
+                }
+            })
+
+            const data = await res.json()
+
+            setUser(data)
+            
+        }
+
+        if ( authtoken != null ) getUserDetails()
+
+    })
     
     return (
         <context.Provider value={{ apiUrl, user }}>

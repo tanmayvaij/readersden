@@ -22,27 +22,52 @@ import '@ionic/react/css/display.css'
 import './theme/variables.css'
 
 // importing pages
+import Home from './pages/Home'
 import Signin from './pages/Signin'
 import Intro from './pages/Intro'
 import Signup from './pages/Signup'
-import Context from './context'
+
+import Context, { GlobalStates } from './context'
 
 setupIonicReact()
 
-const App: React.FC = () => (
-  <Context>
-    <IonApp>
-      <IonReactRouter>
-        <IonRouterOutlet>
+const RoutesWithoutUser = () => {
+  return (
+    <>
+    <Route exact path="/" component={Intro} />
+    <Route exact path="/signin" component={Signin} />
+    <Route exact path="/signup" component={Signup} />
+    </>
+  )
+}
 
-          <Route exact path="/" component={Intro} />
-          <Route exact path="/signin" component={Signin} />
-          <Route exact path="/signup" component={Signup} />
+const RoutesWithUser = () => {
+  return (
+    <>
+    <Route exact path="/" component={Home} />
+    </>
+  )
+}
 
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </IonApp>
-  </Context>
-)
+
+const App: React.FC = () => {
+
+  const userExists = localStorage.getItem("user")
+
+
+  return (
+    <Context>
+      <IonApp>
+        <IonReactRouter>
+          <IonRouterOutlet>
+
+            { userExists ? <RoutesWithUser/> : <RoutesWithoutUser/> }
+
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </IonApp>
+    </Context>
+  )
+}
 
 export default App
