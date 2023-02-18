@@ -1,6 +1,4 @@
-import { Redirect, Route } from 'react-router-dom'
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react'
-import { IonReactRouter } from '@ionic/react-router'
+import { IonNav, setupIonicReact } from '@ionic/react'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -21,52 +19,24 @@ import '@ionic/react/css/display.css'
 /* Theme variables */
 import './theme/variables.css'
 
-// importing pages
-import Home from './pages/Home'
-import Signin from './pages/Signin'
 import Intro from './pages/Intro'
-import Signup from './pages/Signup'
-
-import Context, { GlobalStates } from './context'
+import Home from './pages/Home'
+import Menu from './components/Menu'
 
 setupIonicReact()
 
-const RoutesWithoutUser = () => {
-  return (
-    <>
-    <Route exact path="/" component={Intro} />
-    <Route exact path="/signin" component={Signin} />
-    <Route exact path="/signup" component={Signup} />
-    </>
-  )
-}
-
-const RoutesWithUser = () => {
-  return (
-    <>
-    <Route exact path="/" component={Home} />
-    </>
-  )
-}
-
-
 const App: React.FC = () => {
 
-  const userExists = localStorage.getItem("user")
-
+  const authtoken = localStorage.getItem("authtoken")
 
   return (
-    <Context>
-      <IonApp>
-        <IonReactRouter>
-          <IonRouterOutlet>
-
-            { userExists ? <RoutesWithUser/> : <RoutesWithoutUser/> }
-
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </IonApp>
-    </Context>
+    <>
+    <Menu/>
+    <IonNav root={
+      () => authtoken? <Home/> : <Intro />
+    }>
+    </IonNav>
+    </>
   )
 }
 
