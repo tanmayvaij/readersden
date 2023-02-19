@@ -1,7 +1,0 @@
-{
-  "name": "readersden2",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
-}
