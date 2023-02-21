@@ -1,19 +1,39 @@
-import { Route } from "react-router";
-import { Routes } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import SideBarWithNavbar from "./components/SideBarWithNavbar";
+
+import Home from "./pages/Home";
 
 import Intro from "./pages/Intro";
+import MyBooks from "./pages/MyBooks";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
-export default function App () {
+const RoutesWithUser = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route exact path="/" component={ <Intro/> } />
-                <Route exact path="/signin" component={ <Signin/> } />
-                <Route exact path="/signup" component={ <Signup/> } />
-            </Routes>
-        </BrowserRouter>
+        <>
+        <SideBarWithNavbar/>
+        <Routes>
+            <Route exact path="/" element={ <Home/> } />
+            <Route exact path="/mybooks" element={ <MyBooks/> } />
+        </Routes>
+        </>
     )
+}
+
+const RoutesWithoutUser = () => {
+    return (
+        <Routes>
+            <Route exact path="/" element={ <Intro/> } />
+            <Route exact path="/signin" element={ <Signin/> } />
+            <Route exact path="/signup" element={ <Signup/> } />
+        </Routes>        
+    )
+}
+
+export default function App() {
+
+    const authtoken = localStorage.getItem("authtoken")
+
+    return authtoken ? <RoutesWithUser/> : <RoutesWithoutUser/>
+     
 }
