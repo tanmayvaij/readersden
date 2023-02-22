@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const context = createContext()
 
-const apiUrl = (process.env.NODE_ENV == "development") ? "http://localhost:5000" : "https://readersden.cyclic.app"
+const apiUrl = (process.env.NODE_ENV == "development") ? "http://localhost:5000" : "https://readersden.onrender.com"
 
 export default function Context({ children }) {
 
