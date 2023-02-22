@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { storage } from "../firebaseConfig"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { GlobalStates } from "../context"

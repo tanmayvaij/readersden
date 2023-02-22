@@ -14,7 +14,7 @@ const RoutesWithUser = () => {
         <SideBarWithNavbar/>
         <Routes>
             <Route exact path="/" element={ <Home/> } />
-            <Route exact path="/mybooks" element={ <MyBooks/> } />
+            <Route exact path="/#/mybooks" element={ <MyBooks/> } />
         </Routes>
         </>
     )
