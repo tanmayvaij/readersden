@@ -11,7 +11,9 @@ export default function Signin() {
 
     const signIn = async () => {
 
-        console.log("Signin clicked");
+        console.log("Signin clicked")
+
+        console.log("apiUrl", apiUrl)
         
         const res = await fetch(`${apiUrl}/api/auth/signin`, {
             method: "POST",
