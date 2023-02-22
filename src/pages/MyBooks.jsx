@@ -5,7 +5,7 @@ import { GlobalStates } from "../context"
 
 export default function MyBooks() {
 
-    const { user, mybooks } = GlobalStates()
+    const { user, mybooks, apiUrl } = GlobalStates()
 
     // State to store uploaded file
     const [file, setFile] = useState("")
@@ -47,7 +47,7 @@ export default function MyBooks() {
                 // download url
                 getDownloadURL(uploadTask.snapshot.ref).then( async (url) => {
                     
-                    const res = await fetch("http://localhost:5000/api/book/add_book", {
+                    const res = await fetch(`${apiUrl}/api/book/add_book`, {
                         method: "POST",
                         headers: {
                             "Content-type": "application/json"

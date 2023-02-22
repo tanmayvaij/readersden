@@ -2,8 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const context = createContext()
 
-export default function Context({ children }) {
+const apiUrl = (process.env.NODE_ENV == "development") ? "http://localhost:5000" : "https://readersden.cyclic.app"
 
+export default function Context({ children }) {
 
     const [ user , setUser ] = useState({})
 
@@ -16,7 +17,7 @@ export default function Context({ children }) {
 
     const getUserDetails = async () => {
 
-        const res = await fetch("http://localhost:5000/api/auth/getuser", {
+        const res = await fetch(`${apiUrl}/api/auth/getuser`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
@@ -37,7 +38,7 @@ export default function Context({ children }) {
 
         console.log("getMyBook called")
 
-        const res = await fetch("http://localhost:5000/api/book/get_my_books", {
+        const res = await fetch(`${apiUrl}/api/book/get_my_books`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
@@ -57,7 +58,7 @@ export default function Context({ children }) {
 
     const getAllBooks = async () => {
 
-        const res = await fetch("http://localhost:5000/api/book/get_all_books", {
+        const res = await fetch(`${apiUrl}/api/book/get_all_books`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -93,7 +94,7 @@ export default function Context({ children }) {
 
 
     return (
-        <context.Provider value={{ user, setUser, mybooks, allbooks }}>
+        <context.Provider value={{ user, setUser, mybooks, allbooks, apiUrl }}>
             { children }
         </context.Provider>
     )

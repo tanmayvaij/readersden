@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { GlobalStates } from "../context";
 
 export default function Signin() {
+
+    const { apiUrl } = GlobalStates()
 
     const [ state, setState ] = useState({
         email: "", password: ""
@@ -10,7 +13,7 @@ export default function Signin() {
 
         console.log("Signin clicked");
         
-        const res = await fetch("http://localhost:5000/api/auth/signin", {
+        const res = await fetch(`${apiUrl}/api/auth/signin`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
