@@ -15,8 +15,8 @@ const RoutesWithUser = () => {
         <SideBarWithNavbar/>
         <Routes>
             <Route exact path="/" element={ <Home/> } />
-            <Route exact path="/mybooks" element={ <MyBooks/> } />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route exact path="/my_books" element={ <MyBooks/> } />
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         </>
     )
@@ -28,7 +28,7 @@ const RoutesWithoutUser = () => {
             <Route exact path="/" element={ <Intro/> } />
             <Route exact path="/signin" element={ <Signin/> } />
             <Route exact path="/signup" element={ <Signup/> } />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>        
     )
 }

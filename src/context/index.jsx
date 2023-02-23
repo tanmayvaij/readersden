@@ -14,7 +14,6 @@ export default function Context({ children }) {
 
     const authtoken = localStorage.getItem("authtoken")
 
-
     const getUserDetails = async () => {
 
         const res = await fetch(`${apiUrl}/api/auth/getuser`, {
@@ -36,8 +35,6 @@ export default function Context({ children }) {
 
         const { id } = user
 
-        console.log("getMyBook called")
-
         const res = await fetch(`${apiUrl}/api/book/get_my_books`, {
             method: "POST",
             headers: {
@@ -46,13 +43,9 @@ export default function Context({ children }) {
             body: JSON.stringify({ id })
         })
 
-        console.log("user", user)
-
         const data = await res.json()
 
         setMybooks(data)
-
-        console.log("data", data)
 
     }
 
@@ -66,9 +59,7 @@ export default function Context({ children }) {
         })
 
         const data = await res.json()
-
-        console.log(data)
-
+        
         setAllbooks(data)
 
     }
