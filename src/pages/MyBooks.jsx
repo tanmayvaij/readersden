@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { storage } from "../firebaseConfig"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { GlobalStates } from "../context"
+import BookCard from "../components/BookCard"
 
 export default function MyBooks() {
 
@@ -75,7 +76,7 @@ export default function MyBooks() {
     }
 
     return (
-        <div id="mybooks" className="flex flex-col items-center justify-center min-h-screen">
+        <div id="mybooks" className="pt-28 flex flex-col items-center justify-center min-h-screen">
             <div>
 
                 <input type="file" onChange={handleChange} accept="/image/*" />
@@ -84,15 +85,15 @@ export default function MyBooks() {
                     name="name"
                     value={state.name}
                     onChange={ (e) => setState({ ...state, [e.target.name]: e.target.value }) }
-                type="text" id="helper-text" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com"></input>
+                type="text" id="helper-text" aria-describedby="helper-text-explanation" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com"></input>
 
                 <input 
                     name="desc"
                     value={state.desc}
                     onChange={ (e) => setState({ ...state, [e.target.name]: e.target.value }) }
-                type="text" id="helper-text" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com"></input>
+                type="text" id="helper-text" aria-describedby="helper-text-explanation" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com"></input>
 
-                <button onClick={handleUpload} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                <button onClick={handleUpload} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     Upload
                 </button>
 
@@ -105,15 +106,23 @@ export default function MyBooks() {
                 {
                     mybooks.map((val, id)=>{
                         return (
-                            <div key={id} id="bookdet">
-                                {val?.user_id}
-                                {val?.user_name}
-                                {val?.user_email}
-                                {val?.user_number}
-                                {val?.book_name}
-                                {val?.book_image}
-                                {val?.book_desc}
-                            </div>
+                            // <div key={id} id="bookdet">
+                            //     {val?.user_id}
+                            //     {val?.user_name}
+                            //     {val?.user_email}
+                            //     {val?.user_number}
+                            //     {val?.book_name}
+                            //     {val?.book_image}
+                            //     {val?.book_desc}
+                            // </div>
+
+                            <BookCard 
+                            key={id}
+                            img={val?.book_image} 
+                            name={val?.book_name}
+                            desc={val?.book_desc}
+                        />
+
                         )
                     })
                 }
