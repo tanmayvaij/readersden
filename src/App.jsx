@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Authbar from "./components/Authbar";
 import SideBarWithNavbar from "./components/SideBarWithNavbar";
 
 import Home from "./pages/Home";
@@ -15,6 +16,7 @@ const RoutesWithUser = () => {
         <Routes>
             <Route exact path="/" element={ <Home/> } />
             <Route exact path="/mybooks" element={ <MyBooks/> } />
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         </>
     )
@@ -26,6 +28,7 @@ const RoutesWithoutUser = () => {
             <Route exact path="/" element={ <Intro/> } />
             <Route exact path="/signin" element={ <Signin/> } />
             <Route exact path="/signup" element={ <Signup/> } />
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>        
     )
 }
@@ -34,6 +37,10 @@ export default function App() {
 
     const authtoken = localStorage.getItem("authtoken")
 
-    return authtoken ? <RoutesWithUser/> : <RoutesWithoutUser/>
-     
+    return (
+        <>
+        <Authbar/>
+        { (authtoken) ? <RoutesWithUser/> : <RoutesWithoutUser/> }
+        </>
+    )
 }
