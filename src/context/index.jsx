@@ -45,7 +45,7 @@ export default function Context({ children }) {
 
         const data = await res.json()
 
-        setMybooks(data)
+        setMybooks(data.reverse())
 
     }
 
@@ -60,7 +60,7 @@ export default function Context({ children }) {
 
         const data = await res.json()
         
-        setAllbooks(data)
+        setAllbooks(data.reverse())
 
     }
 

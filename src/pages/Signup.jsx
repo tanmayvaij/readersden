@@ -9,11 +9,14 @@ export default function Signup() {
         name: "", email: "", number: "", password: "", cpassword: ""
     })
 
-    const { name, email, number, password } = state
+    const { name, email, number, password, cpassword } = state
 
     const signUp = async () => {
 
-        console.log("Signup clicked");
+        if ( name == "" || email == "" || number == "" || password == "" || cpassword == "" ) 
+            return alert("Some fields are missing")
+        
+        if ( password != cpassword ) return alert("Passwords are not matching")
         
         const res = await fetch(`${apiUrl}/api/auth/signup`, {
             method: "POST",
@@ -25,11 +28,8 @@ export default function Signup() {
 
         const data = await res.json()
 
-        console.log(data);
-
         if (data.success) {
             localStorage.setItem("authtoken", data.authtoken)
-
             location.href = "/"
         }
 
@@ -41,7 +41,7 @@ export default function Signup() {
             <label className=" text-white block mb-2 text-sm font-medium dark:text-white">Your Name</label>
             <div className="relative mb-6">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    <i className="fa-solid fa-user text-gray-500"></i>
                 </div>
                 <input
                     name="name"
@@ -56,7 +56,7 @@ export default function Signup() {
             <label className=" text-white block mb-2 text-sm font-medium dark:text-white">Your Email</label>
             <div className="relative mb-6">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    <i className="fa-solid fa-envelope text-gray-500"></i>
                 </div>
                 <input 
                     name="email"
@@ -71,7 +71,7 @@ export default function Signup() {
             <label className=" text-white block mb-2 text-sm font-medium dark:text-white">Your Number</label>
             <div className="relative mb-6">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    <i className="fa-solid fa-phone text-gray-500"></i>
                 </div>
                 <input 
                     name="number"
@@ -86,7 +86,7 @@ export default function Signup() {
             <label className=" text-white block mb-2 text-sm font-medium dark:text-white">Set Password</label>
             <div className="relative mb-6">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    <i className="fa-solid fa-lock text-gray-500"></i>
                 </div>
                 <input 
                     name="password"
@@ -101,7 +101,7 @@ export default function Signup() {
             <label className=" text-white block mb-2 text-sm font-medium dark:text-white">Confirm Password</label>
             <div className="relative mb-6">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    <i className="fa-solid fa-lock text-gray-500"></i>
                 </div>
                 <input 
                     name="cpassword"
