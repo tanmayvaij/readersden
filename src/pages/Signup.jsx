@@ -33,6 +33,8 @@ export default function Signup() {
             location.href = "/"
         }
 
+        else alert(data.message)
+
     }
 
     return (
