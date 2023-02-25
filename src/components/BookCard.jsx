@@ -64,7 +64,7 @@ export default function BookCard(props) {
 
     return (
 
-        <div className="w-64 h-96 max-w-sm m-4 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-64 h-[425px] max-w-sm m-4 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 
             <div className="flex items-center justify-center">
                 <img className="rounded-t-lg w-40 h-52" src={props?.img} alt="" />
