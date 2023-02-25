@@ -8,6 +8,10 @@
     font-family: 'Kanit', sans-serif;
 }
 
+body {
+    background-color: #F3F3F3;
+}
+
 #singlebook span {
     font-weight: bold;
     font-style: italic;
