@@ -10,11 +10,14 @@ export default function Home() {
                 {
                     allbooks.map((val, id)=>{
                         return (
+                            val?.visible &&
+
                             <BookCard 
                                 key={id}
                                 img={val?.book_image} 
                                 name={val?.book_name}
                                 desc={val?.book_desc}
+                                _id={val?._id}
                             />
                         )
                     })

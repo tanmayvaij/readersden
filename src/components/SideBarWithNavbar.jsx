@@ -63,7 +63,7 @@ export default function SideBarWithNavbar() {
 
                     <div className="mb-5 flex flex-col items-center justify-center border-b-2 border-black">
 
-                        <i className="text-3xl p-3 fa-solid fa-user-check"></i>
+                    <i className="p-3 text-3xl fa-solid fa-book-open-reader"></i>
 
                         <div className="font-medium py-2">
                             <p>{user?.name}</p> 

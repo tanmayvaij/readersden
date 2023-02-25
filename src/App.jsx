@@ -8,6 +8,7 @@ import Intro from "./pages/Intro";
 import MyBooks from "./pages/MyBooks";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import SingleBook from "./pages/SingleBook";
 
 const RoutesWithUser = () => {
     return (
@@ -16,7 +17,7 @@ const RoutesWithUser = () => {
         <Routes>
             <Route exact path="/" element={ <Home/> } />
             <Route exact path="/my_books" element={ <MyBooks/> } />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route exact path="/:book_id" element={ <SingleBook/> } />
         </Routes>
         </>
     )

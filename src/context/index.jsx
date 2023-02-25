@@ -45,6 +45,8 @@ export default function Context({ children }) {
 
         const data = await res.json()
 
+        console.log(data);
+
         setMybooks(data.reverse())
 
     }

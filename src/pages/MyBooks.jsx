@@ -66,6 +66,7 @@ export default function MyBooks() {
 
                     const data = await res.json()
 
+
                     location.reload()
 
                 })
@@ -127,9 +128,7 @@ export default function MyBooks() {
 
             </div>
 
-        
-
-            <div className="border sm:pl-60 mt-10 sm:flex-row sm:flex-wrap flex flex-col items-center justify-center">
+            <div className="sm:pl-60 mt-10 sm:flex-row sm:flex-wrap flex flex-col items-center justify-center">
 
                 {
                     mybooks.map((val, id) => {
@@ -139,6 +138,8 @@ export default function MyBooks() {
                                 img={val?.book_image}
                                 name={val?.book_name}
                                 desc={val?.book_desc}
+                                _id={val?._id}
+                                visible={val?.visible}
                             />
                         )
                     })
