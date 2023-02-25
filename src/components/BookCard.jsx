@@ -72,11 +72,9 @@ export default function BookCard(props) {
 
             <div className="p-5">
 
-                <a href="#">
-                    <h5 className="sm:text-base mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        {props?.name.substring(0, 32)}
-                    </h5>
-                </a>
+                <h5 className="sm:text-base mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {props?.name.substring(0, 32)}
+                </h5>
 
                 <p className="sm:text-sm mb-3 font-normal text-gray-700 dark:text-gray-400">
                     {props?.desc.substring(0, 55)} ...
