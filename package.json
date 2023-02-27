@@ -11,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@capacitor/android": "^4.7.0",
+    "@capacitor/cli": "^4.7.0",
+    "@capacitor/core": "^4.7.0",
     "firebase": "^9.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

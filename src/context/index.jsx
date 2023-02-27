@@ -12,6 +12,7 @@ export default function Context({ children }) {
 
     const [ allbooks, setAllbooks ] = useState([])
 
+
     const authtoken = localStorage.getItem("authtoken")
 
     const getUserDetails = async () => {
@@ -45,11 +46,10 @@ export default function Context({ children }) {
 
         const data = await res.json()
 
-        console.log(data);
-
         setMybooks(data.reverse())
 
     }
+
 
     const getAllBooks = async () => {
 

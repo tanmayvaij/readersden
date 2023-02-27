@@ -1,0 +1,6 @@
+{
+  "appId": "com.richgreen.app",
+  "appName": "readersden",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}

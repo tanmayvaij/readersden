@@ -10,6 +10,8 @@ export default function Signin() {
     })
 
     const signIn = async () => {
+
+        if ( state.email == "" || state.email == "" ) return alert("Missing credentials")
         
         const res = await fetch(`${apiUrl}/api/auth/signin`, {
             method: "POST",
