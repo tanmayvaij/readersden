@@ -3,6 +3,7 @@ import { storage } from "../firebaseConfig"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { GlobalStates } from "../context"
 import BookCard from "../components/BookCard"
+import Loader from "../components/Loader"
 
 export default function MyBooks() {
 
@@ -131,18 +132,26 @@ export default function MyBooks() {
             <div className="sm:pl-60 mt-10 sm:flex-row sm:flex-wrap flex flex-col items-center justify-center">
 
                 {
-                    mybooks.map((val, id) => {
-                        return (
-                            <BookCard
-                                key={id}
-                                img={val?.book_image}
-                                name={val?.book_name}
-                                desc={val?.book_desc}
-                                _id={val?._id}
-                                visible={val?.visible}
-                            />
-                        )
-                    })
+                    
+                    (mybooks.length!==0) ? (
+
+                        mybooks.map((val, id) => {
+                            return (
+                                <BookCard
+                                    key={id}
+                                    img={val?.book_image}
+                                    name={val?.book_name}
+                                    desc={val?.book_desc}
+                                    _id={val?._id}
+                                    visible={val?.visible}
+                                />
+                            )
+                        })
+
+                    ) : (
+                        <Loader/>
+                    )
+
                 }
 
             </div>

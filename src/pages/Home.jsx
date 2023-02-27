@@ -28,8 +28,8 @@ export default function Home() {
                     ) : (
                         <Loader/>
                     )
-
                 }
+                
         </div>
     )
 }
