@@ -38,7 +38,7 @@ export default function SingleBook() {
 
     return (
 
-        (Object.keys(book) !== 0) ? (
+        (Object.keys(book).length !== 0) ? (
             <div id="singlebook" className="pt-20 pb-10 sm:ml-60 flex flex-col items-center justify-center min-h-screen">
 
                 <div className="text-left w-96">
