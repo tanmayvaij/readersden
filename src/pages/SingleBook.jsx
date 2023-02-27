@@ -54,7 +54,7 @@ export default function SingleBook() {
 
             </div>
         ) : (
-            <div className="flex items-center justify-center min-h-screen">
+            <div className="sm:ml-60 flex items-center justify-center min-h-screen">
                 <Loader/>
             </div>
         )
