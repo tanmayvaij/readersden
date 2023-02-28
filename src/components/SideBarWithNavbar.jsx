@@ -1,11 +1,17 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { GlobalStates } from "../context"
 
 export default function SideBarWithNavbar() {
 
     const { user } = GlobalStates()
 
-    const [ sidebaron, setSidebaron ] = useState("-translate-x-full")
+    const loc = useLocation()
+
+    const navigate = useNavigate()
+
+    const [sidebaron, setSidebaron] = useState("-translate-x-full")
 
     const logOut = () => {
         localStorage.clear()
@@ -13,7 +19,7 @@ export default function SideBarWithNavbar() {
     }
 
     const sideBarOnOff = () => {
-        ( sidebaron == "" ) ? setSidebaron("-translate-x-full") : setSidebaron("")
+        (sidebaron == "") ? setSidebaron("-translate-x-full") : setSidebaron("")
     }
 
     return (
@@ -24,19 +30,19 @@ export default function SideBarWithNavbar() {
                         <div className="flex items-center justify-start">
 
                             <button
-                                onClick={ sideBarOnOff }
+                                onClick={sideBarOnOff}
                                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             >
-                                <svg 
-                                    className="w-6 h-6" 
-                                    aria-hidden="true" 
-                                    fill="currentColor" 
-                                    viewBox="0 0 20 20" 
+                                <svg
+                                    className="w-6 h-6"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
-                                    <path 
-                                        clipRule="evenodd" 
-                                        fillRule="evenodd" 
+                                    <path
+                                        clipRule="evenodd"
+                                        fillRule="evenodd"
                                         d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
                                     >
                                     </path>
@@ -50,23 +56,33 @@ export default function SideBarWithNavbar() {
 
                         </div>
 
+                        {
+                            (loc.pathname != "/" && loc.pathname != "/my_books") &&
+
+                            <div className="flex items-center">
+                                <div className="flex items-center ml-3">
+                                    <i onClick={ () => navigate(-1) } className="fa-solid fa-arrow-left"></i>
+                                </div>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </nav>
 
-            <aside 
-                id="logo-sidebar" 
-                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${sidebaron} bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`} 
+            <aside
+                id="logo-sidebar"
+                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${sidebaron} bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
                 aria-label="Sidebar"
             >
                 <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
 
                     <div className="mb-5 flex flex-col items-center justify-center border-b-2 border-black">
 
-                    <i className="p-3 text-3xl fa-solid fa-book-open-reader"></i>
+                        <i className="p-3 text-3xl fa-solid fa-book-open-reader"></i>
 
                         <div className="font-medium py-2">
-                            <p>{user?.name}</p> 
+                            <p>{user?.name}</p>
                             <p>{user?.email}</p>
                             <p>{user?.number}</p>
                         </div>
@@ -90,9 +106,9 @@ export default function SideBarWithNavbar() {
                         </li>
 
                         <li className="pb-5">
-                            <a 
-                                onClick={logOut} 
-                                href="#" 
+                            <a
+                                onClick={logOut}
+                                href="#"
                                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 <i className="fa-solid fa-door-open"></i>
