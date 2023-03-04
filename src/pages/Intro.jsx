@@ -13,9 +13,6 @@ export default function Intro() {
                 <p className="text-yellow-500">
                     A small step towards <span className="text-green-500"> <i className="fa-solid fa-earth-americas"></i>  Green Earth. </span>
                 </p>
-                <p className="text-yellow-500">
-                    A <i className="fa-solid fa-people-group"></i> Team <span className="text-green-500">Rich Green</span> Product.
-                </p>
             </div>
 
             <div className="mt-10">
