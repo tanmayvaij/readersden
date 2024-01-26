@@ -11,37 +11,36 @@ import Signup from "./pages/Signup";
 import SingleBook from "./pages/SingleBook";
 
 const RoutesWithUser = () => {
-    return (
-        <>
-        <SideBarWithNavbar/>
-        <Routes>
-            <Route exact path="/" element={ <Home/> } />
-            <Route exact path="/my_books" element={ <MyBooks/> } />
-            <Route exact path="/:book_id" element={ <SingleBook/> } />
-        </Routes>
-        </>
-    )
-}
+  return (
+    <>
+      <SideBarWithNavbar />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/my_books" element={<MyBooks />} />
+        <Route exact path="/:book_id" element={<SingleBook />} />
+      </Routes>
+    </>
+  );
+};
 
 const RoutesWithoutUser = () => {
-    return (
-        <Routes>
-            <Route exact path="/" element={ <Intro/> } />
-            <Route exact path="/signin" element={ <Signin/> } />
-            <Route exact path="/signup" element={ <Signup/> } />
-            <Route path="*" element={<Navigate to="/" />} />
-        </Routes>        
-    )
-}
+  return (
+    <Routes>
+      <Route exact path="/" element={<Intro />} />
+      <Route exact path="/signin" element={<Signin />} />
+      <Route exact path="/signup" element={<Signup />} />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+  );
+};
 
 export default function App() {
+  const authtoken = localStorage.getItem("authtoken");
 
-    const authtoken = localStorage.getItem("authtoken")
-
-    return (
-        <>
-        <Authbar/>
-        { (authtoken) ? <RoutesWithUser/> : <RoutesWithoutUser/> }
-        </>
-    )
+  return (
+    <>
+      <Authbar />
+      {authtoken ? <RoutesWithUser /> : <RoutesWithoutUser />}
+    </>
+  );
 }

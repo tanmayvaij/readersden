@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
 
-*{
-    font-family: 'Kanit', sans-serif;
+* {
+  font-family: "Kanit", sans-serif;
 }
 
 body {
-    background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 
 #singlebook span {
-    font-weight: bold;
-    font-style: italic;
-    font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 18px;
 }

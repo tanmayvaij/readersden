@@ -1,96 +1,81 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const context = createContext()
+const context = createContext();
 
-const apiUrl = (process.env.NODE_ENV == "development") ? "http://localhost:5000" : "https://readersden.onrender.com"
+const apiUrl =
+  process.env.NODE_ENV == "development"
+    ? "http://localhost:5000"
+    : "https://readersden.onrender.com";
 
 export default function Context({ children }) {
+  const [user, setUser] = useState({});
 
-    const [ user , setUser ] = useState({})
+  const [mybooks, setMybooks] = useState(null);
 
-    const [ mybooks, setMybooks ] = useState([])
+  const [allbooks, setAllbooks] = useState(null);
 
-    const [ allbooks, setAllbooks ] = useState([])
+  const authtoken = localStorage.getItem("authtoken");
 
+  const getUserDetails = async () => {
+    const res = await fetch(`${apiUrl}/api/auth/getuser`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        authtoken: authtoken,
+      },
+    });
 
-    const authtoken = localStorage.getItem("authtoken")
+    const data = await res.json();
 
-    const getUserDetails = async () => {
+    setUser(data);
+  };
 
-        const res = await fetch(`${apiUrl}/api/auth/getuser`, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json",
-                "authtoken": authtoken
-            }
-        })
+  const getMyBooks = async () => {
+    const { id } = user;
 
-        const data = await res.json()
+    const res = await fetch(`${apiUrl}/api/book/get_my_books`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
 
-        setUser(data)
+    const data = await res.json();
 
-    }
+    if (data) setMybooks(data.reverse());
+  };
 
+  const getAllBooks = async () => {
+    const res = await fetch(`${apiUrl}/api/book/get_all_books`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
 
-    const getMyBooks = async () => {
+    const data = await res.json();
 
-        const { id } = user
+    if (data) setAllbooks(data.reverse());
+  };
 
-        const res = await fetch(`${apiUrl}/api/book/get_my_books`, {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({ id })
-        })
+  useEffect(() => {
+    if (authtoken) getUserDetails();
+  }, []);
 
-        const data = await res.json()
+  useEffect(() => {
+    if (authtoken) getMyBooks();
+  }, [user]);
 
-        setMybooks(data.reverse())
+  useEffect(() => {
+    if (authtoken) getAllBooks();
+  }, []);
 
-    }
-
-
-    const getAllBooks = async () => {
-
-        const res = await fetch(`${apiUrl}/api/book/get_all_books`, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json"
-            }
-        })
-
-        const data = await res.json()
-        
-        setAllbooks(data.reverse())
-
-    }
-
-
-    useEffect(() => {
-
-        if (authtoken) getUserDetails()
-
-    }, [])
-
-    useEffect(() => {
-
-        if (authtoken) getMyBooks()
-
-    }, [user])
-
-    useEffect(() => {
-
-        if (authtoken) getAllBooks()
-
-    }, [])
-
-
-    return (
-        <context.Provider value={{ user, setUser, mybooks, allbooks, apiUrl }}>
-            { children }
-        </context.Provider>
-    )
+  return (
+    <context.Provider value={{ user, setUser, mybooks, allbooks, apiUrl }}>
+      {children}
+    </context.Provider>
+  );
 }
 
-export const GlobalStates = () => useContext(context)
+export const GlobalStates = () => useContext(context);
